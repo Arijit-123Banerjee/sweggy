@@ -7,6 +7,7 @@ const WhatOnMindMenu = ({ list }) => {
         What's on your mind?
       </h3>
       <div className="h-[40vh] w-full flex overflow-scroll ">
+        console.log(list)
         {list.map((value) => {
           return (
             <div key={value.id} className="m-3 shrink-0 rounded-lg">
