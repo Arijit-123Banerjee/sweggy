@@ -1,24 +1,15 @@
-import { React, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Skeleten from './Skeleten'
-import { fetchData } from '../utils/API'
 import { Link } from 'react-router-dom'
 
-const WhatOnMindMenu = () => {
+const WhatOnMindMenu = ({ menuList }) => {
   const [menuItems, setMenuItems] = useState([])
 
   useEffect(() => {
-    const fetchMenuData = async () => {
-      try {
-        const data = await fetchData()
-        setMenuItems(data?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle?.info || [])
-      } catch (error) {
-        console.error('Error fetching menu data:', error)
-      }
+    if (menuList?.data?.cards) {
+      setMenuItems(menuList.data.cards[0]?.card?.card?.gridElements?.infoWithStyle?.info || [])
     }
-
-    fetchMenuData()
-  }, [])
-
+  }, [menuList])
   return menuItems.length === 0 ? (
     <Skeleten />
   ) : (
